@@ -1,6 +1,5 @@
 import uuid
-from datetime import date as dt_date
-from datetime import datetime
+import datetime as dt
 from decimal import Decimal
 
 from pydantic import BaseModel, Field, model_validator
@@ -31,7 +30,7 @@ class ExpenseBase(BaseModel):
     description: str = Field(min_length=1, max_length=255)
     amount: Decimal = Field(gt=0)
     currency: str = Field(default="BRL", min_length=3, max_length=3)
-    date: dt_date = Field(default_factory=dt_date.today)
+    date: dt.date = Field(default_factory=dt.date.today)
     category_id: uuid.UUID | None = None
     group_id: uuid.UUID | None = None
     split_type: SplitType
@@ -46,7 +45,7 @@ class ExpenseUpdate(BaseModel):
     description: str | None = Field(default=None, min_length=1, max_length=255)
     amount: Decimal | None = Field(default=None, gt=0)
     currency: str | None = Field(default=None, min_length=3, max_length=3)
-    date: dt_date | None = None
+    date: dt.date | None = None
     category_id: uuid.UUID | None = None
     group_id: uuid.UUID | None = None
     split_type: SplitType | None = None
@@ -61,7 +60,7 @@ class ExpenseSplitOut(ORMBase):
     participant_friend_id: uuid.UUID | None
     share_amount: Decimal
     share_percentage: Decimal | None
-    created_at: datetime
+    created_at: dt.datetime
 
 
 class ExpenseOut(ORMBase):
@@ -70,9 +69,9 @@ class ExpenseOut(ORMBase):
     description: str
     amount: Decimal
     currency: str
-    date: dt_date = Field(default_factory=dt_date.today)
+    date: dt.date = Field(default_factory=dt.date.today)
     category_id: uuid.UUID | None
     group_id: uuid.UUID | None
     split_type: SplitType
-    created_at: datetime
+    created_at: dt.datetime
     splits: list[ExpenseSplitOut]
