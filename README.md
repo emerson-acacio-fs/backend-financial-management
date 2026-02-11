@@ -9,6 +9,9 @@ docker compose up -d --build
 ```
 
 ## Migrações
+As migrações agora são aplicadas automaticamente na inicialização do container da API.
+
+Se precisar executar manualmente:
 ```bash
 docker compose exec api alembic upgrade head
 ```
