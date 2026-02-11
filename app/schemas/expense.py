@@ -1,5 +1,6 @@
 import uuid
-from datetime import date, datetime
+from datetime import date as dt_date
+from datetime import datetime
 from decimal import Decimal
 
 from pydantic import BaseModel, Field, model_validator
@@ -30,7 +31,7 @@ class ExpenseBase(BaseModel):
     description: str = Field(min_length=1, max_length=255)
     amount: Decimal = Field(gt=0)
     currency: str = Field(default="BRL", min_length=3, max_length=3)
-    date: date = Field(default_factory=date.today)
+    date: dt_date = Field(default_factory=dt_date.today)
     category_id: uuid.UUID | None = None
     group_id: uuid.UUID | None = None
     split_type: SplitType
@@ -45,7 +46,7 @@ class ExpenseUpdate(BaseModel):
     description: str | None = Field(default=None, min_length=1, max_length=255)
     amount: Decimal | None = Field(default=None, gt=0)
     currency: str | None = Field(default=None, min_length=3, max_length=3)
-    date: date | None = None
+    date: dt_date | None = None
     category_id: uuid.UUID | None = None
     group_id: uuid.UUID | None = None
     split_type: SplitType | None = None
@@ -69,7 +70,7 @@ class ExpenseOut(ORMBase):
     description: str
     amount: Decimal
     currency: str
-    date: date = Field(default_factory=date.today)
+    date: dt_date = Field(default_factory=dt_date.today)
     category_id: uuid.UUID | None
     group_id: uuid.UUID | None
     split_type: SplitType
