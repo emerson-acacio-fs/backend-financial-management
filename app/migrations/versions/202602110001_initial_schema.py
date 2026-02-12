@@ -7,6 +7,7 @@ Create Date: 2026-02-11
 
 import sqlalchemy as sa
 from alembic import op
+from sqlalchemy.dialects import postgresql
 
 revision = "202602110001"
 down_revision = None
@@ -14,10 +15,10 @@ branch_labels = None
 depends_on = None
 
 
-split_type_enum = sa.Enum(
+split_type_enum = postgresql.ENUM(
     "amount", "percentage", name="split_type_enum", create_type=False
 )
-participant_type_enum = sa.Enum(
+participant_type_enum = postgresql.ENUM(
     "user", "friend", name="participant_type_enum", create_type=False
 )
 
