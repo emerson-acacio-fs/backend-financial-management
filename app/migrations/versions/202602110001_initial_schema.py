@@ -14,8 +14,12 @@ branch_labels = None
 depends_on = None
 
 
-split_type_enum = sa.Enum("amount", "percentage", name="split_type_enum")
-participant_type_enum = sa.Enum("user", "friend", name="participant_type_enum")
+split_type_enum = sa.Enum(
+    "amount", "percentage", name="split_type_enum", create_type=False
+)
+participant_type_enum = sa.Enum(
+    "user", "friend", name="participant_type_enum", create_type=False
+)
 
 
 def upgrade() -> None:
